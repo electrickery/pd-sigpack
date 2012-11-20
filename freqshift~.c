@@ -99,11 +99,22 @@ static float f_clamp(float x, float a, float b)
 	return x;
 }
 
+static int f_round(t_float f) {
+#if PD_FLOAT_PRECISION == 64
+    return (int)lround(f);
+#else
+    return (int)lroundf(f);
+#endif
+}
+
+// this relies on type-punning, which is not allowed in C99 or 64-bit
+#if 0
 // Round float to int using IEEE int* hack
 static int f_round(float f) {
         f += (3<<22);
         return *((int*)&f) - 0x4b400000;
 }
+#endif
 
 // Cubic interpolation function
 static float cube_interp(const float fr, const float inm1, const float
