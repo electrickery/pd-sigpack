@@ -20,7 +20,9 @@ typedef struct _decimate_tilde
     t_object x_obj;
 	t_sample x_rate;
 	t_sample x_bits;
-	float x_f;
+    t_sample x_y;
+    t_float  x_count;
+	t_float  x_f;
 } t_decimate_tilde;
 
 static void *decimate_tilde_new(t_floatarg rate, t_floatarg bits)
@@ -31,11 +33,13 @@ static void *decimate_tilde_new(t_floatarg rate, t_floatarg bits)
     outlet_new(&x->x_obj, gensym("signal"));
 	floatinlet_new(&x->x_obj, &x->x_rate);
 	floatinlet_new(&x->x_obj, &x->x_bits);
-	x->x_f = 0;
+	x->x_f = 0.;
+    x->x_count = 0;
+    x->x_y = 0.;
 	if (rate) x->x_rate = rate;
-	else x->x_rate = 0.5;
+        else x->x_rate = 0.5;
 	if (bits) x->x_bits = bits;
-	else x->x_bits = 16;
+        else x->x_bits = 16;
     return (x);
 }
 
@@ -47,18 +51,21 @@ static t_int *decimate_tilde_perform(t_int *w)
     int n = (int)(w[4]);
 	float f;
 	long int m=1<<(int)(x->x_bits-1);
-	float y=0, cnt=0;
+	t_float y   = x->x_y;
+    t_float cnt = x->x_count;
     while (n--)
     {
 		f = *in++;
-		cnt+=x->x_rate;
-		if (cnt>=1)
+		cnt += x->x_rate;
+		if (cnt >= 1)
 		{
-			cnt-=1;
+			cnt -= 1;
 			y=(long int)(f*m)/(float)m;
 		}
 		*out++ = y;
     }
+    x->x_count = cnt;
+    x->x_y = y;
     return (w+5);
 }
 
@@ -73,4 +80,8 @@ void decimate_tilde_setup(void)
     	sizeof(t_decimate_tilde), 0, A_DEFFLOAT, A_DEFFLOAT, 0);
     CLASS_MAINSIGNALIN(decimate_tilde_class, t_decimate_tilde, x_f);
     class_addmethod(decimate_tilde_class, (t_method)decimate_tilde_dsp, gensym("dsp"), 0);
+    
+    
+    logpost(NULL, 4, "this is sigpack/decimate~~ 0.0.4");		     
+
 }
