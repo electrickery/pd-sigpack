@@ -81,7 +81,8 @@ void decimate_tilde_setup(void)
     CLASS_MAINSIGNALIN(decimate_tilde_class, t_decimate_tilde, x_f);
     class_addmethod(decimate_tilde_class, (t_method)decimate_tilde_dsp, gensym("dsp"), 0);
     
-    
-    logpost(NULL, 4, "this is sigpack/decimate~~ 0.0.4");		     
-
+    int major, minor, bugfix;
+    sys_getversion(&major, &minor, &bugfix);
+    if (major > 0 || minor > 42) 
+        logpost(NULL, 4, "this is sigpack/decimate~ 0.0.4");
 }

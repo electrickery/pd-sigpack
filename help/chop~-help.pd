@@ -1,30 +1,92 @@
-#N canvas 366 389 401 359 10;
-#X text 60 35 signal chopping modulator;
-#X obj 62 116 osc~ 220;
-#X obj 62 312 dac~;
-#X obj 62 277 *~;
-#X obj 157 260 line~;
-#X obj 157 240 pack 0 50;
-#X obj 157 218 dbtorms;
-#X text 156 144 ->signal modulation input;
-#X text 155 116 ->signal input;
-#X text 60 51 multiplicates incoming signal by factor x;
-#X text 59 68 if modulation signal is positive;
-#X obj 89 146 osc~ 2;
-#X text 300 11 arg<factor>;
-#X text 293 301 sIgpAck 0.02;
-#X obj 62 186 chop~ 0;
-#X text 222 316 2003 www.weiss-archiv.de;
-#X text 60 13 ---chop~---;
-#X floatatom 157 172 5 0 0 1 -->factor[-2/2] - -;
-#X floatatom 157 199 5 0 100 0 - - -;
-#X connect 1 0 14 0;
-#X connect 3 0 2 0;
-#X connect 3 0 2 1;
-#X connect 4 0 3 1;
-#X connect 5 0 4 0;
-#X connect 6 0 5 0;
-#X connect 11 0 14 1;
-#X connect 14 0 3 0;
-#X connect 17 0 14 2;
-#X connect 18 0 6 0;
+#N canvas 496 82 557 534 10;
+#X obj 0 0 cnv 15 552 40 empty empty chop 3 12 0 18 -204280 -1 0;
+#X obj 0 353 cnv 3 550 3 empty empty inlets 8 12 0 13 -228856 -1 0
+;
+#X obj 0 456 cnv 3 550 3 empty empty outlets 8 12 0 13 -228856 -1 0
+;
+#X obj 0 493 cnv 3 550 3 empty empty arguments 8 12 0 13 -228856 -1
+0;
+#X obj 79 465 cnv 17 3 17 empty empty 0 5 9 0 16 -228856 -162280 0
+;
+#X obj 79 367 cnv 17 3 17 empty empty 0 5 9 0 16 -228856 -162280 0
+;
+#X obj 0 527 cnv 15 552 21 empty empty empty 20 12 0 14 -233017 -33289
+0;
+#N canvas 238 349 428 75 Related_objects 0;
+#X obj 0 0 cnv 15 425 20 empty empty empty 3 12 0 14 -204280 -1 0;
+#X text 6 1 Related Objects;
+#X restore 206 529 pd Related_objects;
+#N canvas 587 624 379 261 META 0;
+#X text 12 25 LICENSE GPL v2;
+#X text 12 183 MAINTAINER Fred Jan Kraan <fjkraan@xs4all.nl>;
+#X text 12 45 DESCRIPTION signal chopping modulator;
+#X text 12 5 KEYWORDS signal modulator;
+#X text 12 83 INLET_0 signal;
+#X text 12 143 OUTLET_0 signal;
+#X text 12 163 AUTHOR Martin Weiss;
+#X text 12 204 HELP_PATCH_AUTHORS Martin Weiss 2003 Updated by Fred
+Jan Kraan 2016-02.;
+#X text 12 103 INLET_1 signal;
+#X text 12 123 INLET_2 float;
+#X text 12 64 VERSION 0.03;
+#X restore 502 531 pd META;
+#X text 8 23 multiplicates incoming signal by factor x if modulation
+signal is positive, f 75;
+#X obj 506 6 chop~;
+#X obj 123 290 output~;
+#X obj 123 203 sigpack/chop~ 0;
+#X obj 165 127 osc~ 2;
+#X obj 305 72 vsl 15 128 0 10 0 0 empty empty empty 0 -9 0 10 -262144
+-1 -1 12700 1;
+#X obj 168 68 hsl 128 15 0 440 0 0 empty empty empty -2 -8 0 10 -262144
+-1 -1 6400 1;
+#X floatatom 165 88 5 0 0 0 - - -, f 5;
+#X obj 334 296 tabwrite~ \$0-chop;
+#X obj 334 275 metro 100;
+#X obj 334 254 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+1;
+#X floatatom 305 208 5 0 0 0 - - -, f 5;
+#X text 107 367 signal;
+#X text 162 367 - signal to modulate;
+#X obj 79 392 cnv 17 3 17 empty empty 0 5 9 0 16 -228856 -162280 0
+;
+#X text 107 392 signal;
+#X obj 79 417 cnv 17 3 17 empty empty 0 5 9 0 16 -228856 -162280 0
+;
+#X text 107 417 float;
+#X text 162 392 - modulator signal;
+#X obj 122 105 osc~ 440;
+#X text 162 417 - Amplification factor when modulator is positive.
+Amplification factor is 1 when modulator is negative.;
+#X text 107 465 signal;
+#X text 164 465 - modulated signal;
+#X text 96 502 default amplification factor;
+#X obj 334 317 tabwrite~ \$0-chopFreq;
+#N canvas 683 549 450 300 view 0;
+#N canvas 0 50 450 250 (subpatch) 0;
+#X array \$0-chop 100 float 0;
+#X coords 0 10 99 -10 200 140 1 0 0;
+#X restore 128 78 graph;
+#X text 112 77 10;
+#X text 106 205 -10;
+#N canvas 0 50 450 250 (subpatch) 0;
+#X array \$0-chopFreq 100 float 0;
+#X coords 0 1 100 -1 200 20 1 0 0;
+#X restore 128 222 graph;
+#X obj 0 0 cnv 15 425 20 empty empty empty 3 12 0 14 -204280 -1 0;
+#X text 6 1 waveform viewer;
+#X text 14 266 array updates can cause dropouts when visible;
+#X restore 415 253 pd view waveform;
+#X connect 12 0 11 0;
+#X connect 12 0 11 1;
+#X connect 12 0 17 0;
+#X connect 13 0 12 1;
+#X connect 13 0 33 0;
+#X connect 14 0 12 2;
+#X connect 14 0 20 0;
+#X connect 15 0 16 0;
+#X connect 16 0 13 0;
+#X connect 18 0 17 0;
+#X connect 18 0 33 0;
+#X connect 19 0 18 0;
+#X connect 28 0 12 0;
