@@ -181,15 +181,7 @@ static t_int *freqshift_tilde_perform(t_int *w)
 	     * sidebands cancel (more of less) and just leave the shifted
 	     * components */
 	    *out1++ = (rm2 - rm1) * 0.5f; /*downshifting*/
-//	    *out1++ = rm1 * 0.5f;
 	    *out2++ = (rm2 + rm1) * 0.5f; /*upshifting*/
-//    *out2++ = xcoeffs[n];  // xcoeffs[n] are accessible
-//    *out2++ = hilb;        // hilb is NaN!
-//      *out2++ = (t_float)(x->x_dptr  & (D_SIZE - 1)); // is a ascending value starting at 0
-//      *out2++ = (t_float)((x->x_dptr - i*2) & (D_SIZE - 1)); // is a ascending value starting at 0, but not synced to block borders
-//      *out2++ = (t_float)((x->x_dptr - n*2) & (D_SIZE - 1)); // is like xcoeffs[n] but range 0-255
-//      *out2++ = (t_float)((xcoeffs[n] * x->x_delay[(x->x_dptr - n*2) & (D_SIZE - 1)])); // this looks like a dynamic version of xcoeffs[n]
-//      *out2++ = rm2 * 0.5f;
 
 		x->x_dptr = (x->x_dptr + 1) & (D_SIZE - 1);
 	    x->x_phi += shift_i * freq_fix;
@@ -220,5 +212,4 @@ void freqshift_tilde_setup(void)
     	sizeof(t_freqshift_tilde), 0, A_DEFFLOAT, 0);
     CLASS_MAINSIGNALIN(freqshift_tilde_class, t_freqshift_tilde, x_f);
     class_addmethod(freqshift_tilde_class, (t_method)freqshift_tilde_dsp, gensym("dsp"), 0);
-    post("freqshift~ modified 5");
 }
