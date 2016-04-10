@@ -55,7 +55,7 @@ static void *freqshift_tilde_new(t_floatarg shift)
 	x->x_last_shift = 0.0f;
 	x->x_f = 0;
 	for (i = 0; i < SIN_T_SIZE; i++) {
-	x->x_sint[i] = sin(2.0f * M_PI * (float)i / (float)SIN_T_SIZE);
+        x->x_sint[i] = sin(2.0f * M_PI * (float)i / (float)SIN_T_SIZE);
 	}
 	if (shift) x->x_shift = shift;
 	else x->x_shift = 0;
@@ -151,7 +151,7 @@ static t_int *freqshift_tilde_perform(t_int *w)
 		/* Perform the Hilbert FIR convolution
 		 * (probably FFT would be faster) */
 		hilb = 0.0f;
-	    for (i = 0; i <= NZEROS/2; i++) {
+	    for (i = 0; i < NZEROS/2; i++) {
 	        hilb += (xcoeffs[i] * x->x_delay[(x->x_dptr - i*2) & (D_SIZE - 1)]);
 		}
 
@@ -162,9 +162,12 @@ static t_int *freqshift_tilde_perform(t_int *w)
 	     * sinewave. This creates a +180 degree sideband at source-shift Hz and
 	     * a 0 degree sindeband at source+shift Hz */
 	    frac_p = x->x_phi - int_p;
-	    rm1 = hilb * cube_interp(frac_p, x->x_sint[int_p], x->x_sint[int_p+1],
-	                             x->x_sint[int_p+2], x->x_sint[int_p+3]);
 
+	    /* the Hilbert has a gain of pi/2, which we have to correct for, thanks
+	     * Fons! */
+	    rm1 = hilb * 0.63661978f * cube_interp(frac_p, x->x_sint[int_p],
+	                    x->x_sint[int_p+1], x->x_sint[int_p+2], x->x_sint[int_p+3]);
+                        
 	    /* Calcuate the table positions for the cosine modulator */
 	    int_p = (int_p + SIN_T_SIZE / 4) & (SIN_T_SIZE - 1);
 
@@ -172,13 +175,21 @@ static t_int *freqshift_tilde_perform(t_int *w)
 	     * cosinewave. This creates a 0 degree sideband at source+shift Hz
 	     * and a -180 degree sindeband at source-shift Hz */
 	    rm2 = x->x_delay[(x->x_dptr - 100) & (D_SIZE - 1)] * cube_interp(frac_p,
-	          x->x_sint[int_p], x->x_sint[int_p+1], x->x_sint[int_p+2], x->x_sint[int_p+3]);
+	          x->x_sint[int_p], x->x_sint[int_p + 1], x->x_sint[int_p + 2], x->x_sint[int_p + 3]);
 
 		/* Output the sum and differences of the ringmods. The +/-180 degree
 	     * sidebands cancel (more of less) and just leave the shifted
 	     * components */
 	    *out1++ = (rm2 - rm1) * 0.5f; /*downshifting*/
+//	    *out1++ = rm1 * 0.5f;
 	    *out2++ = (rm2 + rm1) * 0.5f; /*upshifting*/
+//    *out2++ = xcoeffs[n];  // xcoeffs[n] are accessible
+//    *out2++ = hilb;        // hilb is NaN!
+//      *out2++ = (t_float)(x->x_dptr  & (D_SIZE - 1)); // is a ascending value starting at 0
+//      *out2++ = (t_float)((x->x_dptr - i*2) & (D_SIZE - 1)); // is a ascending value starting at 0, but not synced to block borders
+//      *out2++ = (t_float)((x->x_dptr - n*2) & (D_SIZE - 1)); // is like xcoeffs[n] but range 0-255
+//      *out2++ = (t_float)((xcoeffs[n] * x->x_delay[(x->x_dptr - n*2) & (D_SIZE - 1)])); // this looks like a dynamic version of xcoeffs[n]
+//      *out2++ = rm2 * 0.5f;
 
 		x->x_dptr = (x->x_dptr + 1) & (D_SIZE - 1);
 	    x->x_phi += shift_i * freq_fix;
@@ -209,4 +220,5 @@ void freqshift_tilde_setup(void)
     	sizeof(t_freqshift_tilde), 0, A_DEFFLOAT, 0);
     CLASS_MAINSIGNALIN(freqshift_tilde_class, t_freqshift_tilde, x_f);
     class_addmethod(freqshift_tilde_class, (t_method)freqshift_tilde_dsp, gensym("dsp"), 0);
+    post("freqshift~ modified 5");
 }
