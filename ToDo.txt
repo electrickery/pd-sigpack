@@ -1,0 +1,10 @@
+Sigpack 0.0.4+ ToDo
+
+- check the objects ported from swh-plugins with latest version from 
+  www.plugins.org.uk or 
+  http://http.debian.net/debian/pool/main/s/swh-plugins/swh-plugins_0.4.15+1.orig.tar.gz
+- move all sample rate settings to dsp method
+- sieve~: find out how it should work and implement it. Don't forget to optimize.
+- split~: add a mode for hold, next to the current switch to 0.
+- transient~: find out why it doesn't work and fix it. Replacing guts with 
+  newer original code doesn't work.
