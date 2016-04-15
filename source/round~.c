@@ -44,7 +44,7 @@ static t_int *round_tilde_perform(t_int *w)
     {
 		f = *in++;
 		mult = f * x->x_coarse;
-		value = (!x->x_course) ? (int)mult / x->x_coarse : 0;
+		value = (!x->x_coarse) ? (int)mult / x->x_coarse : 0;
 		*out++ = value;
     }
     return (w+5);
