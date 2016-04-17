@@ -6,5 +6,4 @@ Sigpack 0.0.4+ ToDo
 - move all sample rate settings to dsp method
 - sieve~: find out how it should work and implement it. Don't forget to optimize.
 - split~: add a mode for hold, next to the current switch to 0.
-- transient~: find out why it doesn't work and fix it. Replacing guts with 
-  newer original code doesn't work.
+- vowel~: fix the breaking of audio subsystem
