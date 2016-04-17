@@ -1,23 +1,23 @@
-#N canvas 480 90 557 534 10;
+#N canvas 492 84 557 534 10;
 #X obj 0 0 cnv 15 552 40 empty empty freqshift~ 3 12 0 18 -204280 -1
 0;
 #X obj 0 353 cnv 3 550 3 empty empty inlets 8 12 0 13 -228856 -1 0
 ;
 #X obj 0 425 cnv 3 550 3 empty empty outlets 8 12 0 13 -228856 -1 0
 ;
-#X obj 0 462 cnv 3 550 3 empty empty arguments 8 12 0 13 -228856 -1
+#X obj 0 482 cnv 3 550 3 empty empty arguments 8 12 0 13 -228856 -1
 0;
 #X obj 79 434 cnv 17 3 17 empty empty 0 5 9 0 16 -228856 -162280 0
 ;
 #X obj 79 367 cnv 17 3 17 empty empty 0 5 9 0 16 -228856 -162280 0
 ;
-#X obj 0 496 cnv 15 552 21 empty empty empty 20 12 0 14 -233017 -33289
+#X obj 0 516 cnv 15 552 21 empty empty empty 20 12 0 14 -233017 -33289
 0;
 #N canvas 238 349 428 75 Related_objects 0;
 #X obj 0 0 cnv 15 425 20 empty empty empty 3 12 0 14 -204280 -1 0;
 #X text 6 1 Related Objects;
-#X restore 206 498 pd Related_objects;
-#N canvas 579 628 379 261 META 0;
+#X restore 206 518 pd Related_objects;
+#N canvas 583 626 379 261 META 0;
 #X text 12 25 LICENSE GPL v2;
 #X text 12 198 MAINTAINER Fred Jan Kraan <fjkraan@xs4all.nl>;
 #X text 12 83 INLET_0 signal;
@@ -31,19 +31,19 @@
 Jan Kraan 2016-04.;
 #X text 12 163 AUTHOR Martin Weiss code from swh_plugins by steve harris
 www.plugin.org.uk;
-#X restore 502 500 pd META;
-#X obj 162 305 output~;
-#X obj 365 223 metro 100;
-#X obj 365 202 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X restore 502 520 pd META;
+#X obj 123 289 output~;
+#X obj 365 220 metro 100;
+#X obj 365 199 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
 1;
 #X text 107 367 signal;
 #X obj 79 392 cnv 17 3 17 empty empty 1 5 9 0 16 -228856 -162280 0
 ;
 #X text 107 434 signal;
-#N canvas 480 684 450 351 view 0;
+#N canvas 531 675 450 382 view 0;
 #N canvas 0 50 450 250 (subpatch) 0;
 #X array \$0-downshift 100 float 0;
-#X coords 0 1 99 -1 200 100 1 0 0;
+#X coords 0 -1 99 1 200 100 1 0 0;
 #X restore 128 153 graph;
 #N canvas 0 50 450 250 (subpatch) 0;
 #X array \$0-osc 100 float 0;
@@ -56,51 +56,39 @@ www.plugin.org.uk;
 #X text 112 240 -1;
 #N canvas 0 50 450 250 (subpatch) 0;
 #X array \$0-upshift 100 float 0;
-#X coords 0 1 99 -1 200 100 1 0 0;
+#X coords 0 -1 99 1 200 100 1 0 0;
 #X restore 128 36 graph;
 #X text 118 35 1;
 #X text 112 123 -1;
-#X restore 446 201 pd view waveform;
-#X text 8 23 mirrors signal at specified borders, f 75;
-#X obj 365 244 tabwrite~ \$0-osc;
+#X restore 365 303 pd view waveform;
+#X obj 365 241 tabwrite~ \$0-osc;
 #X text 107 392 float;
 #X text 162 367 - signal to process;
-#X text 164 434 - processed signal;
-#X obj 252 68 vsl 10 64 0 440 0 1 empty empty empty 0 -9 0 10 -262144
--1 -1 300 1;
-#X floatatom 252 142 5 0 0 0 - - -, f 5;
-#X obj 123 100 osc~ 440;
-#X obj 123 198 sigpack/freqshift~ 100;
-#X obj 365 285 tabwrite~ \$0-downshift;
-#X obj 365 264 tabwrite~ \$0-upshift;
-#X text 96 471 1: default frequency shift value;
+#X floatatom 252 99 5 0 0 0 - - -, f 5;
+#X obj 123 81 osc~ 440;
+#X obj 123 179 sigpack/freqshift~ 100;
+#X obj 365 282 tabwrite~ \$0-downshift;
+#X obj 365 261 tabwrite~ \$0-upshift;
+#X text 96 491 1: default frequency shift value;
 #X text 162 392 - frequency shift value in Hz;
 #X obj 476 6 freqshift~;
-#X msg 107 68 1760;
-#X msg 146 68 440;
-#X obj 124 268 *~ 0;
-#X obj 253 268 *~ 0;
-#X obj 285 268 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
-1;
-#X obj 156 268 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
-1;
-#X connect 10 0 17 0;
-#X connect 10 0 25 0;
-#X connect 10 0 26 0;
+#X text 8 23 frequency shift by ring modulation, f 75;
+#X obj 255 76 hsl 128 15 0 440 0 0 empty empty shift_frequency 10 8
+0 10 -262144 -1 -1 0 1;
+#X obj 79 456 cnv 17 3 17 empty empty 1 5 9 0 16 -228856 -162280 0
+;
+#X text 107 456 signal;
+#X text 164 434 - down-shifted signal;
+#X text 165 456 - up-shifted signal;
+#X connect 10 0 16 0;
+#X connect 10 0 22 0;
+#X connect 10 0 23 0;
 #X connect 11 0 10 0;
+#X connect 19 0 21 1;
+#X connect 20 0 16 0;
+#X connect 20 0 21 0;
+#X connect 21 0 9 0;
+#X connect 21 0 9 1;
 #X connect 21 0 22 0;
-#X connect 22 0 24 1;
-#X connect 23 0 17 0;
-#X connect 23 0 24 0;
-#X connect 24 0 25 0;
-#X connect 24 0 32 0;
-#X connect 24 1 26 0;
-#X connect 24 1 33 0;
-#X connect 30 0 23 0;
-#X connect 31 0 23 0;
-#X connect 32 0 9 0;
-#X connect 32 0 9 1;
-#X connect 33 0 9 0;
-#X connect 33 0 9 1;
-#X connect 34 0 33 1;
-#X connect 35 0 32 1;
+#X connect 21 1 23 0;
+#X connect 28 0 19 0;

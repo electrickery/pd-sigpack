@@ -1,5 +1,5 @@
-#N canvas 448 80 557 534 10;
-#X obj 0 0 cnv 15 552 40 empty empty decimate 3 12 0 18 -204280 -1
+#N canvas 446 81 557 534 10;
+#X obj 0 0 cnv 15 552 40 empty empty decimate~ 3 12 0 18 -204280 -1
 0;
 #X obj 0 353 cnv 3 550 3 empty empty inlets 8 12 0 13 -228856 -1 0
 ;
@@ -32,15 +32,13 @@ Jan Kraan 2016-02.;
 #X text 12 64 VERSION 0.03;
 #X restore 502 531 pd META;
 #X obj 123 308 output~;
-#X obj 381 49 vsl 15 128 32 1 0 0 empty empty empty 0 -9 0 10 -262144
--1 -1 12700 1;
-#X obj 197 47 hsl 128 15 0 1 0 0 empty empty empty -2 -8 0 10 -262144
--1 -1 0 1;
+#X obj 197 47 hsl 128 15 0 1 0 0 empty empty sample_rate_reduction
+3 8 0 10 -262144 -1 -1 3700 1;
 #X floatatom 193 106 8 0 0 0 - - -, f 8;
 #X obj 389 259 metro 100;
 #X obj 389 238 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
 1;
-#X floatatom 354 184 5 0 0 0 - - -, f 5;
+#X floatatom 342 130 5 0 0 0 - - -, f 5;
 #X text 107 367 signal;
 #X obj 79 392 cnv 17 3 17 empty empty 0 5 9 0 16 -228856 -162280 0
 ;
@@ -50,7 +48,7 @@ Jan Kraan 2016-02.;
 #X obj 122 105 osc~ 440;
 #X text 107 465 signal;
 #X text 96 502 default amplification factor;
-#N canvas 474 641 450 300 view 0;
+#N canvas 472 642 450 300 view 0;
 #N canvas 0 50 450 250 (subpatch) 0;
 #X array \$0-reduced 100 float 0;
 #X coords 0 1 99 -1 200 140 1 0 0;
@@ -66,17 +64,15 @@ Jan Kraan 2016-02.;
 #X text 112 205 -1;
 #X restore 389 323 pd view waveform;
 #X obj 123 221 sigpack/decimate~ 0.5 16;
-#X obj 354 162 int;
-#X obj 401 59 vradio 15 1 0 8 empty empty empty 0 -8 0 10 -262144 -1
--1 4;
-#X obj 401 184 + 1;
+#X obj 342 108 int;
+#X obj 342 85 + 1;
 #X obj 482 6 decimate~;
 #X text 8 23 signal decimation by resolution and sample rate, f 75
 ;
 #X obj 389 280 tabwrite~ \$0-clean;
 #X obj 389 302 tabwrite~ \$0-reduced;
 #X obj 193 66 hradio 15 1 0 8 empty empty empty 0 -8 0 10 -262144 -1
--1 0;
+-1 4;
 #N canvas 1 79 450 300 powOf2 0;
 #N canvas 0 50 450 250 (subpatch) 0;
 #X array \$0-powOf2 8 float 3;
@@ -108,20 +104,24 @@ Jan Kraan 2016-02.;
 #X text 162 392 - sample rate reduction 1 = 0% \, 0 = 100%;
 #X text 162 417 - sample bit reduction 1 = 1 bit \, 32 = 32 bits;
 #X text 164 465 - decimated signal;
-#X connect 10 0 25 0;
-#X connect 11 0 12 0;
-#X connect 12 0 24 1;
-#X connect 13 0 30 0;
-#X connect 13 0 31 0;
-#X connect 14 0 13 0;
-#X connect 20 0 24 0;
-#X connect 20 0 30 0;
-#X connect 24 0 9 0;
-#X connect 24 0 9 1;
-#X connect 24 0 31 0;
-#X connect 25 0 24 2;
-#X connect 25 0 15 0;
-#X connect 26 0 27 0;
-#X connect 27 0 25 0;
-#X connect 32 0 33 0;
-#X connect 33 0 12 0;
+#X obj 342 66 hradio 15 1 0 8 empty empty empty 0 -8 0 10 -262144 -1
+-1 2;
+#X obj 344 47 hsl 128 15 1 32 0 0 empty empty sample_bit_reduction
+4 8 0 10 -262144 -1 -1 1100 1;
+#X connect 10 0 11 0;
+#X connect 11 0 23 1;
+#X connect 12 0 28 0;
+#X connect 12 0 29 0;
+#X connect 13 0 12 0;
+#X connect 19 0 23 0;
+#X connect 19 0 28 0;
+#X connect 23 0 9 0;
+#X connect 23 0 9 1;
+#X connect 23 0 29 0;
+#X connect 24 0 23 2;
+#X connect 24 0 14 0;
+#X connect 25 0 24 0;
+#X connect 30 0 31 0;
+#X connect 31 0 11 0;
+#X connect 37 0 25 0;
+#X connect 38 0 24 0;

@@ -1,4 +1,4 @@
-#N canvas 427 84 557 534 10;
+#N canvas 425 85 557 534 10;
 #X obj 0 0 cnv 15 552 40 empty empty transient~ 3 12 0 18 -204280 -1
 0;
 #X obj 0 353 cnv 3 550 3 empty empty inlets 8 12 0 13 -228856 -1 0
@@ -17,7 +17,7 @@
 #X obj 0 0 cnv 15 425 20 empty empty empty 3 12 0 14 -204280 -1 0;
 #X text 6 1 Related Objects;
 #X restore 206 520 pd Related_objects;
-#N canvas 565 588 379 261 META 0;
+#N canvas 563 589 379 261 META 0;
 #X text 12 25 LICENSE GPL v2;
 #X text 12 194 MAINTAINER Fred Jan Kraan <fjkraan@xs4all.nl>;
 #X text 12 83 INLET_0 signal;
@@ -32,9 +32,9 @@ harris www.plugin.org.uk;
 #X text 12 45 DESCRIPTION signal transient mangler;
 #X text 11 122 INLET_2 float;
 #X restore 502 522 pd META;
-#X obj 113 303 output~;
-#X obj 324 288 metro 100;
-#X obj 324 267 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X obj 123 303 output~;
+#X obj 383 243 metro 100;
+#X obj 383 224 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X text 107 367 signal;
 #X obj 79 392 cnv 17 3 17 empty empty 1 5 9 0 16 -228856 -162280 0
@@ -55,14 +55,13 @@ harris www.plugin.org.uk;
 #X text 106 78 100;
 #X text 118 205 0;
 #X text 6 1 waveform viewer;
-#X restore 405 266 pd view waveform;
+#X restore 383 306 pd view waveform;
 #X text 164 456 - processed signal;
-#X obj 499 6 diode~;
-#X obj 324 309 tabwrite~ \$0-clean;
+#X obj 383 264 tabwrite~ \$0-clean;
 #X text 9 23 transient mangler, f 75;
-#X obj 113 212 sigpack/transient~ 1 0.1;
-#X floatatom 285 150 5 0 0 0 - - -, f 5;
-#X floatatom 214 150 5 0 0 0 - - -, f 5;
+#X obj 123 212 sigpack/transient~ 1 0.1;
+#X floatatom 322 131 5 0 0 0 - - -, f 5;
+#X floatatom 251 131 5 0 0 0 - - -, f 5;
 #X text 96 493 1: default attach value \, 2: default decay value,
 f 71;
 #X text 107 392 float;
@@ -71,7 +70,7 @@ f 71;
 ;
 #X text 107 417 float;
 #X text 162 417 - decay value;
-#X obj 324 330 tabwrite~ \$0-trans;
+#X obj 383 285 tabwrite~ \$0-trans;
 #N canvas 316 709 450 318 testsignal 0;
 #X obj 44 32 inlet;
 #X obj 173 37 inlet;
@@ -110,33 +109,34 @@ f 71;
 #X connect 14 0 8 0;
 #X connect 15 0 8 1;
 #X connect 16 0 2 0;
-#X restore 112 111 pd testsignal;
-#X obj 112 43 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X restore 122 111 pd testsignal;
+#X obj 122 43 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
-#X obj 149 61 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X obj 159 61 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
-#X obj 187 81 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X obj 197 81 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
-#X text 131 41 sine resonator 100 Hz;
-#X text 204 80 adc~;
-#X text 168 60 lo pass filtered noise;
-#X obj 217 106 hsl 128 15 -1 1 0 0 empty empty attack 20 8 0 10 -262144
--1 -1 8800 1;
-#X obj 216 128 hsl 128 15 -1 1 0 0 empty empty decay 20 8 0 10 -262144
--1 -1 8200 1;
+#X text 141 41 sine resonator 100 Hz;
+#X text 214 80 adc~;
+#X text 178 60 lo pass filtered noise;
+#X obj 254 93 hsl 128 15 -1 1 0 0 empty empty attack 20 8 0 10 -262144
+-1 -1 0 1;
+#X obj 325 112 hsl 128 15 -1 1 0 0 empty empty decay 20 8 0 10 -262144
+-1 -1 0 1;
 #X text 162 367 - signal to mangle;
-#X connect 10 0 18 0;
-#X connect 10 0 29 0;
+#X obj 476 6 transient~;
+#X connect 10 0 17 0;
+#X connect 10 0 28 0;
 #X connect 11 0 10 0;
-#X connect 20 0 9 0;
-#X connect 20 0 9 1;
-#X connect 20 0 29 0;
-#X connect 21 0 20 2;
-#X connect 22 0 20 1;
-#X connect 30 0 20 0;
-#X connect 30 0 18 0;
-#X connect 31 0 30 0;
-#X connect 32 0 30 1;
-#X connect 33 0 30 2;
-#X connect 37 0 22 0;
-#X connect 38 0 21 0;
+#X connect 19 0 9 0;
+#X connect 19 0 9 1;
+#X connect 19 0 28 0;
+#X connect 20 0 19 2;
+#X connect 21 0 19 1;
+#X connect 29 0 19 0;
+#X connect 29 0 17 0;
+#X connect 30 0 29 0;
+#X connect 31 0 29 1;
+#X connect 32 0 29 2;
+#X connect 36 0 21 0;
+#X connect 37 0 20 0;

@@ -1,5 +1,5 @@
-#N canvas 494 83 557 534 10;
-#X obj 0 0 cnv 15 552 40 empty empty foldback 3 12 0 18 -204280 -1
+#N canvas 492 84 557 534 10;
+#X obj 0 0 cnv 15 552 40 empty empty foldback~ 3 12 0 18 -204280 -1
 0;
 #X obj 0 353 cnv 3 550 3 empty empty inlets 8 12 0 13 -228856 -1 0
 ;
@@ -32,12 +32,10 @@
 Jan Kraan 2016-04.;
 #X restore 502 519 pd META;
 #X obj 123 290 output~;
-#X obj 270 47 vsl 10 64 -1 1 0 1 empty empty empty 0 -9 0 10 -262144
--1 -1 6300 1;
-#X obj 334 275 metro 100;
-#X obj 334 254 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X obj 392 229 metro 100;
+#X obj 392 210 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
-#X floatatom 270 121 5 0 0 0 - - -, f 5;
+#X floatatom 270 114 5 0 0 0 - - -, f 5;
 #X text 107 367 signal;
 #X obj 79 392 cnv 17 3 17 empty empty 1 5 9 0 16 -228856 -162280 0
 ;
@@ -60,15 +58,13 @@ Jan Kraan 2016-04.;
 #X obj 0 0 cnv 15 425 20 empty empty empty 3 12 0 14 -204280 -1 0;
 #X text 6 1 waveform viewer;
 #X text 14 266 array updates can cause dropouts when visible;
-#X restore 415 253 pd view waveform;
+#X restore 392 292 pd view waveform;
 #X text 8 23 mirrors signal at specified borders, f 75;
 #X obj 476 6 foldback~;
 #X obj 123 203 sigpack/foldback~ 0.5 0.5;
-#X obj 196 47 vsl 10 64 -1 1 0 1 empty empty empty 0 -9 0 10 -262144
--1 -1 1500 1;
-#X floatatom 196 121 5 0 0 0 - - -, f 5;
-#X obj 334 296 tabwrite~ \$0-osc;
-#X obj 334 317 tabwrite~ \$0-foldback;
+#X floatatom 196 114 5 0 0 0 - - -, f 5;
+#X obj 392 250 tabwrite~ \$0-osc;
+#X obj 392 271 tabwrite~ \$0-foldback;
 #X text 107 392 float;
 #X text 162 367 - signal to process;
 #X text 164 453 - processed signal;
@@ -76,15 +72,19 @@ Jan Kraan 2016-04.;
 #X text 162 417 - upper mirror level;
 #X text 96 490 1: default lower mirror level \, 2: default upper mirror
 level;
-#X connect 10 0 13 0;
-#X connect 10 0 23 2;
-#X connect 11 0 26 0;
-#X connect 11 0 27 0;
-#X connect 12 0 11 0;
-#X connect 18 0 23 0;
-#X connect 18 0 26 0;
-#X connect 23 0 9 0;
-#X connect 23 0 9 1;
-#X connect 23 0 27 0;
-#X connect 24 0 25 0;
-#X connect 24 0 23 1;
+#X obj 198 74 hsl 128 15 -1 1 0 0 empty empty lower_mirror_level 10
+8 0 10 -262144 -1 -1 0 1;
+#X obj 273 94 hsl 128 15 -1 1 0 0 empty empty upper_mirror_level 10
+8 0 10 -262144 -1 -1 0 1;
+#X connect 10 0 24 0;
+#X connect 10 0 25 0;
+#X connect 11 0 10 0;
+#X connect 12 0 22 2;
+#X connect 17 0 22 0;
+#X connect 17 0 24 0;
+#X connect 22 0 9 0;
+#X connect 22 0 9 1;
+#X connect 22 0 25 0;
+#X connect 23 0 22 1;
+#X connect 32 0 23 0;
+#X connect 33 0 12 0;

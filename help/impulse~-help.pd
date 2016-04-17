@@ -1,4 +1,4 @@
-#N canvas 492 84 557 534 10;
+#N canvas 490 85 557 534 10;
 #X obj 0 0 cnv 15 552 40 empty empty impulse~ 3 12 0 18 -204280 -1
 0;
 #X obj 0 353 cnv 3 550 3 empty empty inlets 8 12 0 13 -228856 -1 0
@@ -31,15 +31,15 @@ www.plugin.org.uk;
 #X text 12 5 KEYWORDS signal impulse;
 #X text 12 44 DESCRIPTION single sample impulse generator;
 #X restore 502 500 pd META;
-#X obj 94 269 output~;
+#X obj 94 295 output~;
 #X obj 273 272 metro 100;
-#X obj 273 251 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X obj 273 251 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X text 107 367 signal;
 #X obj 79 392 cnv 17 3 17 empty empty 1 5 9 0 16 -228856 -162280 0
 ;
 #X text 107 434 signal;
-#N canvas 593 586 450 300 view 0;
+#N canvas 591 587 450 300 view 0;
 #N canvas 0 50 450 250 (subpatch) 0;
 #X array \$0-impulse 100 float 0;
 #X coords 0 -1 99 1 200 140 1 0 0;
@@ -49,15 +49,15 @@ www.plugin.org.uk;
 #X text 14 266 array updates can cause dropouts when visible;
 #X text 118 77 1;
 #X text 112 205 -1;
-#X restore 354 270 pd view waveform;
+#X restore 273 317 pd view waveform;
 #X text 107 393 float;
 #X text 96 471 1: default denoninate value;
 #X text 8 23 non-bandlimited single-sample impulses, f 75;
 #X obj 476 6 impulse~;
 #X obj 95 127 sigpack/impulse~ 440;
 #X obj 273 296 tabwrite~ \$0-impulse;
-#X obj 179 294 print~;
-#X obj 179 270 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+#X obj 179 317 print~;
+#X obj 179 294 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
 #X text 162 393 - phase;
 #X msg 95 70 440;

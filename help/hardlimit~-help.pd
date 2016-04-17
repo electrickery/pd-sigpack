@@ -33,20 +33,18 @@ Jan Kraan 2016-02.;
 #X text 12 142 INLET_3 float;
 #X restore 502 540 pd META;
 #X obj 123 308 output~;
-#X obj 230 49 vsl 10 64 0 1 0 0 empty empty empty 0 -9 0 10 -262144
--1 -1 0 1;
-#X floatatom 181 124 5 0 0 0 - - -, f 5;
+#X floatatom 172 124 5 0 0 0 - - -, f 5;
 #X obj 389 259 metro 100;
-#X obj 389 238 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X obj 389 238 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
 1;
-#X floatatom 230 124 5 0 0 0 - - -, f 5;
+#X floatatom 221 124 5 0 0 0 - - -, f 5;
 #X text 107 367 signal;
 #X obj 79 392 cnv 17 3 17 empty empty 1 5 9 0 16 -228856 -162280 0
 ;
 #X obj 79 417 cnv 17 3 17 empty empty 2 5 9 0 16 -228856 -162280 0
 ;
 #X text 107 417 float;
-#X obj 122 122 osc~ 440;
+#X obj 122 104 osc~ 440;
 #X text 107 474 signal;
 #N canvas 470 643 450 294 view 0;
 #N canvas 0 50 450 250 (subpatch) 0;
@@ -67,9 +65,7 @@ Jan Kraan 2016-02.;
 #X text 107 392 float;
 #X text 8 23 brick hard limiter with residue mixer, f 75;
 #X obj 476 6 hardlimit~;
-#X obj 279 49 vsl 10 64 0 1 0 0 empty empty empty 0 -9 0 10 -262144
--1 -1 0 1;
-#X floatatom 279 124 5 0 0 0 - - -, f 5;
+#X floatatom 270 124 5 0 0 0 - - -, f 5;
 #X obj 79 442 cnv 17 3 17 empty empty 3 5 9 0 16 -228856 -162280 0
 ;
 #X text 107 442 float;
@@ -82,19 +78,23 @@ Jan Kraan 2016-02.;
 mix;
 #X obj 389 302 tabwrite~ \$0-limited;
 #X obj 123 221 sigpack/hardlimit~ -8 1 0;
-#X obj 181 49 vsl 10 64 -50 0 0 0 empty empty empty 0 -9 0 10 -262144
--1 -1 0 1;
-#X connect 10 0 14 0;
-#X connect 10 0 37 2;
-#X connect 11 0 37 1;
-#X connect 12 0 22 0;
-#X connect 12 0 36 0;
-#X connect 13 0 12 0;
-#X connect 19 0 22 0;
-#X connect 19 0 37 0;
-#X connect 26 0 27 0;
-#X connect 26 0 37 3;
-#X connect 37 0 9 0;
-#X connect 37 0 9 1;
-#X connect 37 0 36 0;
-#X connect 38 0 11 0;
+#X obj 175 53 hsl 128 15 -50 0 0 0 empty empty limit_level 10 8 0 10
+-262144 -1 -1 10200 1;
+#X obj 224 74 hsl 128 15 0 1 0 0 empty empty wet/dry_mix 10 8 0 10
+-262144 -1 -1 4000 1;
+#X obj 273 95 hsl 128 15 0 1 0 0 empty empty residue_mix 10 8 0 10
+-262144 -1 -1 9100 1;
+#X connect 10 0 35 1;
+#X connect 11 0 21 0;
+#X connect 11 0 34 0;
+#X connect 12 0 11 0;
+#X connect 13 0 35 2;
+#X connect 18 0 21 0;
+#X connect 18 0 35 0;
+#X connect 25 0 35 3;
+#X connect 35 0 9 0;
+#X connect 35 0 9 1;
+#X connect 35 0 34 0;
+#X connect 36 0 10 0;
+#X connect 37 0 13 0;
+#X connect 38 0 25 0;
