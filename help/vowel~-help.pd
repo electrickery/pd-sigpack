@@ -1,4 +1,4 @@
-#N canvas 401 84 557 534 10;
+#N canvas 475 81 557 534 10;
 #X obj 0 0 cnv 15 552 40 empty empty vowel~ 3 12 0 18 -204280 -1 0
 ;
 #X obj 0 357 cnv 3 550 3 empty empty inlets 8 12 0 13 -228856 -1 0
@@ -32,22 +32,18 @@ by alex@smartelectronix.com;
 #X text 12 45 DESCRIPTION signal simple formant filter function;
 #X restore 502 500 pd META;
 #X obj 103 301 output~;
-#X obj 316 261 metro 100;
-#X obj 316 240 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X obj 316 282 metro 100;
+#X obj 316 261 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
 1;
 #X text 107 369 signal;
 #X obj 79 394 cnv 17 3 17 empty empty 1 5 9 0 16 -228856 -162280 0
 ;
 #X text 107 434 signal;
-#N canvas 510 659 450 300 view 0;
+#N canvas 506 661 450 300 view 0;
 #N canvas 0 50 450 250 (subpatch) 0;
 #X array \$0-vowel 100 float 0;
 #X coords 0 1 99 -1 200 140 1 0 0;
 #X restore 128 78 graph;
-#N canvas 0 50 450 250 (subpatch) 0;
-#X array \$0-clean 100 float 0;
-#X coords 0 1 100 -1 200 20 1 0 0;
-#X restore 128 222 graph;
 #X obj 0 0 cnv 15 425 20 empty empty empty 3 12 0 14 -204280 -1 0;
 #X text 6 1 waveform viewer;
 #X text 14 266 array updates can cause dropouts when visible;
@@ -56,13 +52,12 @@ by alex@smartelectronix.com;
 #X restore 316 324 pd view waveform;
 #X text 164 434 - processed signal;
 #X text 162 369 - signal to rectify;
-#X obj 316 282 tabwrite~ \$0-clean;
 #X text 107 394 float;
 #X text 8 23 simple formant filter, f 75;
-#X obj 475 6 vowel~;
+#X obj 494 6 vowel~;
 #X obj 103 214 sigpack/vowel~ 0;
 #X obj 196 56 vradio 15 1 0 5 empty empty empty 0 -8 0 10 -262144 -1
--1 4;
+-1 2;
 #X obj 316 303 tabwrite~ \$0-vowel;
 #X text 214 56 a;
 #X text 214 71 e;
@@ -70,7 +65,7 @@ by alex@smartelectronix.com;
 #X text 214 101 o;
 #X text 214 116 u;
 #X obj 102 116 phasor~ 220;
-#X obj 102 56 tgl 15 0 empty empty empty 0 -6 0 8 -262144 -1 -1 0 1
+#X obj 102 56 tgl 15 0 empty empty empty 0 -6 0 8 -262144 -1 -1 1 1
 ;
 #X obj 102 74 metro 200;
 #X obj 102 95 random 440;
@@ -78,17 +73,15 @@ by alex@smartelectronix.com;
 #X text 161 394 - vowel 0: a \, 1: e \, 2: i \, 3: o \, 4: u;
 #X text 96 471 1: default vowel, f 71;
 #X floatatom 204 139 5 0 0 0 - - -, f 5;
-#X connect 10 0 18 0;
-#X connect 10 0 24 0;
+#X connect 10 0 23 0;
 #X connect 11 0 10 0;
-#X connect 22 0 34 0;
-#X connect 23 0 22 1;
-#X connect 23 0 37 0;
-#X connect 30 0 18 0;
-#X connect 30 0 22 0;
+#X connect 21 0 33 0;
+#X connect 22 0 21 1;
+#X connect 22 0 36 0;
+#X connect 29 0 21 0;
+#X connect 30 0 31 0;
 #X connect 31 0 32 0;
-#X connect 32 0 33 0;
-#X connect 33 0 30 0;
-#X connect 34 0 24 0;
-#X connect 34 0 9 1;
-#X connect 34 0 9 0;
+#X connect 32 0 29 0;
+#X connect 33 0 23 0;
+#X connect 33 0 9 1;
+#X connect 33 0 9 0;
