@@ -9,6 +9,8 @@
 #pragma warning( disable : 4305 )
 #endif
 
+#define MEMORY 10
+
 /* ------------------------ vowel~ ----------------------------- */
 /* simple formant filter */
 /* code from musicdsp.org posted by alex@smartelectronix.com */
@@ -19,6 +21,7 @@ typedef struct _vowel_tilde
 {
     t_object x_obj;
 	t_sample x_vowelnum;
+    double   x_memory[MEMORY];
 	float x_f;
 } t_vowel_tilde;
 
@@ -29,7 +32,11 @@ static void *vowel_tilde_new(t_floatarg vowelnum)
     outlet_new(&x->x_obj, gensym("signal"));
 	floatinlet_new(&x->x_obj, &x->x_vowelnum);
 	x->x_f = 0;
-	if(vowelnum) x->x_vowelnum = vowelnum;
+    int i;
+    for (i = 0; i < MEMORY; i++) {
+        x->x_memory[i] = 0;
+    }
+	if (vowelnum) x->x_vowelnum = vowelnum;
 	else x->x_vowelnum = 0;
     return (x);
 }
@@ -57,34 +64,33 @@ const double coeff[5][11]= {
 	}
 };
 
-static double memory[10] = {0,0,0,0,0,0,0,0,0,0};
-
-float formant_filter (float in, int vowelnum)
+float formant_filter (float in, int vowelnum, t_vowel_tilde *x)
 {
 	float res;
-	res= (float) (coeff[vowelnum][0]*in +
-		coeff[vowelnum][1]*memory[0] +
-		coeff[vowelnum][2]*memory[1] +
-		coeff[vowelnum][3]*memory[2] +
-		coeff[vowelnum][4]*memory[3] +
-		coeff[vowelnum][5]*memory[4] +
-		coeff[vowelnum][6]*memory[5] +
-		coeff[vowelnum][7]*memory[6] +
-		coeff[vowelnum][8]*memory[7] +
-		coeff[vowelnum][9]*memory[8] +
-		coeff[vowelnum][10]*memory[9]);
+	res = (float) (coeff[vowelnum][0] * in +
+		coeff[vowelnum][1] * x->x_memory[0] +
+		coeff[vowelnum][2] * x->x_memory[1] +
+		coeff[vowelnum][3] * x->x_memory[2] +
+		coeff[vowelnum][4] * x->x_memory[3] +
+		coeff[vowelnum][5] * x->x_memory[4] +
+		coeff[vowelnum][6] * x->x_memory[5] +
+		coeff[vowelnum][7] * x->x_memory[6] +
+		coeff[vowelnum][8] * x->x_memory[7] +
+		coeff[vowelnum][9] * x->x_memory[8] +
+		coeff[vowelnum][10] * x->x_memory[9]);
 
-	memory[9]=memory[8];
-	memory[8]=memory[7];
-	memory[7]=memory[6];
-	memory[6]=memory[5];
-	memory[5]=memory[4];
-	memory[4]=memory[3];
-	memory[3]=memory[2];
-	memory[2]=memory[1];
-	memory[1]=memory[0];
-	memory[0]=(double)res;
-	return res;
+	x->x_memory[9] = x->x_memory[8];
+	x->x_memory[8] = x->x_memory[7];
+	x->x_memory[7] = x->x_memory[6];
+	x->x_memory[6] = x->x_memory[5];
+	x->x_memory[5] = x->x_memory[4];
+	x->x_memory[4] = x->x_memory[3];
+	x->x_memory[3] = x->x_memory[2];
+	x->x_memory[2] = x->x_memory[1];
+	x->x_memory[1] = x->x_memory[0];
+//    if (isnan(res)) res = 0.; // IEEE check for NaN   
+	x->x_memory[0] = (double)res;
+ 	return res;
 }
 
 static t_int *vowel_tilde_perform(t_int *w)
@@ -97,7 +103,7 @@ static t_int *vowel_tilde_perform(t_int *w)
     while (n--)
     {
 		f = *in++;
-		value = formant_filter(f, (int)x->x_vowelnum);
+		value = formant_filter(f, (int)x->x_vowelnum, x);
 		*out++ = value;
     }
     return (w+5);
@@ -108,6 +114,20 @@ static void vowel_tilde_dsp(t_vowel_tilde *x, t_signal **sp)
     dsp_add(vowel_tilde_perform, 4, x, sp[0]->s_vec, sp[1]->s_vec, sp[0]->s_n);
 }
 
+static void vowel_state(t_vowel_tilde *x)
+{
+    logpost(NULL, 4, "--==## vowel~ state ##==--");
+    logpost(NULL, 4, "x_vowelnum: %f", x->x_vowelnum);
+    int vn = (int)x->x_vowelnum;
+    int i;
+    for (i = 0; i <= 10; i++) {
+        logpost(NULL, 4, "coeff[%d][%d]: %lf", vn, i, coeff[vn][i]);
+    }
+    for (i = 0; i < 10; i++) {
+        logpost(NULL, 4, "memory[%d] = %lf", i, x->x_memory[i]);
+    }
+}
+
 void vowel_tilde_setup(void)
 {
     vowel_tilde_class = class_new(gensym("vowel~"), (t_newmethod)vowel_tilde_new, 0,
@@ -115,4 +135,5 @@ void vowel_tilde_setup(void)
     CLASS_MAINSIGNALIN(vowel_tilde_class, t_vowel_tilde, x_f);
     class_addmethod(vowel_tilde_class, (t_method)vowel_tilde_dsp, gensym("dsp"), 0);
 	class_addmethod(vowel_tilde_class, (t_method)formant_filter, gensym("formant_filter"), A_GIMME, A_NULL); 
+    class_addmethod(vowel_tilde_class, (t_method)vowel_state, gensym("state"), 0);
 }
