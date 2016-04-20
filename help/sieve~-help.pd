@@ -1,4 +1,4 @@
-#N canvas 447 81 557 534 10;
+#N canvas 457 79 557 534 10;
 #X obj 0 0 cnv 15 552 40 empty empty sieve~ 3 12 0 18 -204280 -1 0
 ;
 #X obj 0 353 cnv 3 550 3 empty empty inlets 8 12 0 13 -228856 -1 0
@@ -40,7 +40,7 @@ Jan Kraan 2016-02.;
 ;
 #X obj 95 77 osc~ 440;
 #X text 107 454 signal;
-#N canvas 518 711 450 300 view 0;
+#N canvas 516 712 450 300 view 0;
 #N canvas 0 50 450 250 (subpatch) 0;
 #X array \$0-sieve 100 float 0;
 #X coords 0 1 99 -1 200 140 1 0 0;
@@ -59,11 +59,10 @@ Jan Kraan 2016-02.;
 #X obj 344 250 tabwrite~ \$0-clean;
 #X floatatom 213 88 5 -10 10 0 - - -, f 5;
 #X text 162 367 - signal to process;
-#X text 96 491 default shape value, f 71;
 #X obj 502 6 sieve~;
 #X text 8 23 simple sample sifter, f 75;
 #X obj 96 175 sigpack/sieve~ 0 0.9;
-#X obj 154 79 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
+#X obj 154 79 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X obj 79 418 cnv 17 3 17 empty empty 2 5 9 0 16 -228856 -162280 0
 ;
@@ -71,17 +70,23 @@ Jan Kraan 2016-02.;
 #X text 108 419 float;
 #X text 163 391 - mode. 0: ... 1: ...;
 #X obj 344 271 tabwrite~ \$0-sieve;
-#X obj 216 70 hsl 128 15 -10 10 0 0 empty empty sample 10 8 0 10 -262144
--1 -1 6900 1;
-#X text 163 417 - sample value. Range: 0 - 10;
+#X obj 216 70 hsl 128 15 -1 1 0 0 empty empty level 10 8 0 10 -262144
+-1 -1 7000 1;
+#X obj 95 137 *~;
+#X obj 227 109 hsl 128 15 0 1 0 0 empty empty amplitude 10 8 0 10 -262144
+-1 -1 100 1;
+#X text 163 417 - signal level. Range: -1 - 1;
+#X text 96 491 1: default mode \, 2: default signal level, f 71;
 #X connect 10 0 18 0;
-#X connect 10 0 30 0;
+#X connect 10 0 29 0;
 #X connect 11 0 10 0;
 #X connect 14 0 18 0;
-#X connect 14 0 24 0;
-#X connect 19 0 24 2;
-#X connect 24 0 9 0;
-#X connect 24 0 9 1;
-#X connect 24 0 30 0;
-#X connect 25 0 24 1;
-#X connect 31 0 19 0;
+#X connect 14 0 31 0;
+#X connect 19 0 23 2;
+#X connect 23 0 9 0;
+#X connect 23 0 9 1;
+#X connect 23 0 29 0;
+#X connect 24 0 23 1;
+#X connect 30 0 19 0;
+#X connect 31 0 23 0;
+#X connect 32 0 31 1;
