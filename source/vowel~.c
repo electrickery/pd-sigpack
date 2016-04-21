@@ -13,7 +13,11 @@
 
 /* ------------------------ vowel~ ----------------------------- */
 /* simple formant filter */
-/* code from musicdsp.org posted by alex@smartelectronix.com */
+/* code from musicdsp.org posted by alex@smartelectronix.com     */
+
+/* moved memory array to instance struct, preventing NaN issues  */
+/* and other problems with multiple instances.                   */
+/* fjkraan, 2016-04-20                                           */
 
 static t_class *vowel_tilde_class;
 
@@ -88,7 +92,6 @@ float formant_filter (float in, int vowelnum, t_vowel_tilde *x)
 	x->x_memory[3] = x->x_memory[2];
 	x->x_memory[2] = x->x_memory[1];
 	x->x_memory[1] = x->x_memory[0];
-//    if (isnan(res)) res = 0.; // IEEE check for NaN   
 	x->x_memory[0] = (double)res;
  	return res;
 }
@@ -96,9 +99,9 @@ float formant_filter (float in, int vowelnum, t_vowel_tilde *x)
 static t_int *vowel_tilde_perform(t_int *w)
 {
 	t_vowel_tilde *x = (t_vowel_tilde *)(w[1]);
-    t_float *in = (t_float *)(w[2]);
-    t_float *out = (t_float *)(w[3]);
-    int n = (int)(w[4]);
+    t_float *in      = (t_float *)(w[2]);
+    t_float *out     = (t_float *)(w[3]);
+    int n            = (int)(w[4]);
 	float f, value;
     while (n--)
     {
