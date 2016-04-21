@@ -20,7 +20,7 @@ typedef struct _sieve_tilde
 	t_sample x_mode;
 	t_sample x_sample;
 	t_sample x_last;
-	float x_f;
+	t_float x_f;
 } t_sieve_tilde;
 
 static void *sieve_tilde_new(t_floatarg mode, t_floatarg sample)
@@ -41,9 +41,9 @@ static void *sieve_tilde_new(t_floatarg mode, t_floatarg sample)
     return (x);
 }
 
-static float round(float in)
+inline static t_float sieve_tilde_round(t_float in)
 {
-	float y, round;
+	t_float y, round;
 	int temp;
 	{
 		round = in * 10;
@@ -59,14 +59,17 @@ static t_int *sieve_tilde_perform(t_int *w)
     t_float *in = (t_float *)(w[2]);
     t_float *out = (t_float *)(w[3]);
     int n = (int)(w[4]);
-	float f;
+	t_float f;
 	int mode = x->x_mode;
+    t_float roundedSample = sieve_tilde_round(x->x_sample);
+    t_float roundF;
     while (n--)
     {
 		f = *in++;
+        roundF = sieve_tilde_round((double)f);
 		switch(mode){
 		case(0):
-			if (round(f) != round(x->x_sample))
+			if (roundF != roundedSample)
 			{
 				*out++ = f;
 				x->x_last = f;
@@ -77,7 +80,7 @@ static t_int *sieve_tilde_perform(t_int *w)
 			}
 			break;
 		case(1):
-			if (round(f) == round(x->x_sample))
+			if (roundF == roundedSample)
 			{
 				*out++ = f;
 				x->x_last = f;
