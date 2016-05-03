@@ -25,7 +25,13 @@ contact
 -----------------TODO--------------------
 :: update swh_plugins code from latest release: http://plugin.org.uk/releases/0.4.15
 
-
+-----------------v0.044------------------
+::decimate~: fixed gitch at block start
+::freqshift~: fixed off-by-one loop causing NaNs. (Partially) updated from upstream
+::round~: fixed division by zero issue
+::transient~: optimized/updated
+::vowel~: moved static array to instance struct to allow multiple instances and prevent NaNs
+::*-help.pd: reformatted and improved
 
 -----------------v0.043------------------
 :: removed type-punning since it doesn't work for 64-bit or C99
