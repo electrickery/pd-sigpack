@@ -26,6 +26,7 @@ wavewrap~.class.sources =  source/wavewrap~.c
 
 datafiles = \
 $(wildcard help/*-help.pd) \
+help/output~.pd \
 LICENSE.txt \
 README.txt \
 sigpack-meta.pd
