@@ -1,4 +1,4 @@
-#N canvas 492 84 557 534 10;
+#N canvas 490 85 557 534 10;
 #X obj 0 0 cnv 15 552 40 empty empty foldback~ 3 12 0 18 -204280 -1
 0;
 #X obj 0 353 cnv 3 550 3 empty empty inlets 8 12 0 13 -228856 -1 0
@@ -33,7 +33,7 @@ Jan Kraan 2016-04.;
 #X restore 502 519 pd META;
 #X obj 123 290 output~;
 #X obj 392 229 metro 100;
-#X obj 392 210 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X obj 392 210 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 1
 1;
 #X floatatom 270 114 5 0 0 0 - - -, f 5;
 #X text 107 367 signal;
@@ -44,13 +44,11 @@ Jan Kraan 2016-04.;
 #X text 107 417 float;
 #X obj 122 105 osc~ 440;
 #X text 107 453 signal;
-#N canvas 601 582 450 300 view 0;
+#N canvas 599 583 450 300 view 0;
 #N canvas 0 50 450 250 (subpatch) 0;
 #X array \$0-foldback 100 float 0;
-#X coords 0 -1 99 1 200 140 1 0 0;
+#X coords 0 2 99 -2 200 140 1 0 0;
 #X restore 128 78 graph;
-#X text 112 77 10;
-#X text 106 205 -10;
 #N canvas 0 50 450 250 (subpatch) 0;
 #X array \$0-osc 100 float 0;
 #X coords 0 1 100 -1 200 20 1 0 0;
@@ -58,6 +56,8 @@ Jan Kraan 2016-04.;
 #X obj 0 0 cnv 15 425 20 empty empty empty 3 12 0 14 -204280 -1 0;
 #X text 6 1 waveform viewer;
 #X text 14 266 array updates can cause dropouts when visible;
+#X text 118 205 0;
+#X text 118 77 2;
 #X restore 392 292 pd view waveform;
 #X text 8 23 mirrors signal at specified borders, f 75;
 #X obj 476 6 foldback~;
@@ -73,9 +73,9 @@ Jan Kraan 2016-04.;
 #X text 96 490 1: default lower mirror level \, 2: default upper mirror
 level;
 #X obj 198 74 hsl 128 15 -1 1 0 0 empty empty lower_mirror_level 10
-8 0 10 -262144 -1 -1 0 1;
+8 0 10 -262144 -1 -1 2800 1;
 #X obj 273 94 hsl 128 15 -1 1 0 0 empty empty upper_mirror_level 10
-8 0 10 -262144 -1 -1 0 1;
+8 0 10 -262144 -1 -1 10400 1;
 #X connect 10 0 24 0;
 #X connect 10 0 25 0;
 #X connect 11 0 10 0;
