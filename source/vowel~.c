@@ -10,6 +10,8 @@
 #endif
 
 #define MEMORY 10
+#define MINCOEFF 0.f
+#define MAXCOEFF 4.f
 
 /* ------------------------ vowel~ ----------------------------- */
 /* simple formant filter */
@@ -41,6 +43,8 @@ static void *vowel_tilde_new(t_floatarg vowelnum)
         x->x_memory[i] = 0;
     }
 	if (vowelnum) x->x_vowelnum = vowelnum;
+    if (vowelnum < MINCOEFF) vowelnum = MINCOEFF;
+    if (vowelnum > MAXCOEFF) vowelnum = MAXCOEFF;
 	else x->x_vowelnum = 0;
     return (x);
 }
@@ -103,6 +107,8 @@ static t_int *vowel_tilde_perform(t_int *w)
     t_float *out     = (t_float *)(w[3]);
     int n            = (int)(w[4]);
 	float f, value;
+    if (x->x_vowelnum < MINCOEFF) x->x_vowelnum = MINCOEFF;
+    if (x->x_vowelnum > MAXCOEFF) x->x_vowelnum = MAXCOEFF;
     while (n--)
     {
 		f = *in++;
