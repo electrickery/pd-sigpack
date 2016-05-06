@@ -24,6 +24,10 @@ contact
 
 -----------------TODO--------------------
 :: update swh_plugins code from latest release: http://plugin.org.uk/releases/0.4.15
+:: normalize version to major.minor.bugfix
+
+-----------------v0.045------------------
+
 
 -----------------v0.044------------------
 ::decimate~: fixed gitch at block start
