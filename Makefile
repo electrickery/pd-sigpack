@@ -12,6 +12,7 @@ freqshift~.class.sources = source/freqshift~.c
 hardlimit~.class.sources = source/hardlimit~.c  
 harmgen~.class.sources =   source/harmgen~.c  
 impulse~.class.sources =   source/impulse~.c  
+impulse2~.class.sources =   source/impulse2~.c  
 rectify~.class.sources =   source/rectify~.c  
 round~.class.sources =     source/round~.c  
 saturate~.class.sources =  source/saturate~.c  
