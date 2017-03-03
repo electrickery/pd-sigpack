@@ -1,4 +1,4 @@
-#N canvas 490 85 557 534 10;
+#N canvas 1034 78 571 534 10;
 #X obj 0 0 cnv 15 552 40 empty empty impulse~ 3 12 0 18 -204280 -1
 0;
 #X obj 0 353 cnv 3 550 3 empty empty inlets 8 12 0 13 -228856 -1 0
@@ -30,16 +30,16 @@ Jan Kraan 2016-04.;
 www.plugin.org.uk;
 #X text 12 5 KEYWORDS signal impulse;
 #X text 12 44 DESCRIPTION single sample impulse generator;
-#X restore 502 500 pd META;
+#X restore 497 500 pd META;
 #X obj 94 295 output~;
-#X obj 273 272 metro 100;
-#X obj 273 251 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
+#X obj 295 270 metro 100;
+#X obj 295 249 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 1;
 #X text 107 367 signal;
 #X obj 79 392 cnv 17 3 17 empty empty 1 5 9 0 16 -228856 -162280 0
 ;
 #X text 107 434 signal;
-#N canvas 591 587 450 300 view 0;
+#N canvas 1088 641 450 300 view 1;
 #N canvas 0 50 450 250 (subpatch) 0;
 #X array \$0-impulse 100 float 0;
 #X coords 0 -1 99 1 200 140 1 0 0;
@@ -49,21 +49,26 @@ www.plugin.org.uk;
 #X text 14 266 array updates can cause dropouts when visible;
 #X text 118 77 1;
 #X text 112 205 -1;
-#X restore 273 317 pd view waveform;
+#X restore 278 317 pd view waveform;
 #X text 107 393 float;
 #X text 96 471 1: default denoninate value;
 #X text 8 23 non-bandlimited single-sample impulses, f 75;
 #X obj 476 6 impulse~;
 #X obj 95 127 sigpack/impulse~ 440;
-#X obj 273 296 tabwrite~ \$0-impulse;
+#X obj 278 296 tabwrite~ \$0-impulse;
 #X obj 179 317 print~;
 #X obj 179 294 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X text 162 393 - phase;
 #X msg 95 70 440;
 #X msg 129 70 1760;
 #X text 162 367 - impulse frequency;
 #X text 164 434 - single sample impulses;
+#X obj 327 58 vsl 15 128 0 1.5 0 0 empty empty empty 0 -9 0 10 -262144
+-1 -1 1400 1;
+#X floatatom 327 194 5 0 0 0 - - -, f 5;
+#X obj 232 94 t f b b;
+#X text 162 393 - phase: 0 is the last sample of the block \, 1 is
+the first., f 49;
 #X connect 10 0 21 0;
 #X connect 11 0 10 0;
 #X connect 20 0 21 0;
@@ -71,5 +76,10 @@ www.plugin.org.uk;
 #X connect 20 0 9 1;
 #X connect 20 0 22 0;
 #X connect 23 0 22 0;
+#X connect 24 0 20 0;
 #X connect 25 0 20 0;
-#X connect 26 0 20 0;
+#X connect 28 0 29 0;
+#X connect 28 0 30 0;
+#X connect 30 0 20 1;
+#X connect 30 1 22 0;
+#X connect 30 2 21 0;

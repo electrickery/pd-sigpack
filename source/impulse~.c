@@ -13,6 +13,11 @@
 // ------------------------ impulse~ -----------------------------
 // non-bandlimited single-sample impulses
 // code from swh_plugins by steve harris www.plugin.org.uk
+// maker: Andy Wingo &lt;wingo at pobox dot com&gt;
+// copyright: GPL
+// name: Nonbandlimited single-sample impulses (Frequency: Control)
+// Based on work by James McCartney in SuperCollider.
+
 
 static t_class *impulse_tilde_class;
 
@@ -47,7 +52,7 @@ static t_int *impulse_tilde_perform(t_int *w)
     	f = *(in++);
 		phase_step = f / x->x_sample_rate;
 		if (x->x_phase > 1.f) {
-			x->x_phase -= 1.f;
+			x->x_phase -= (int)x->x_phase;
 			value = 1.f;
 		} else {
 			value = 0.f;
@@ -60,7 +65,7 @@ static t_int *impulse_tilde_perform(t_int *w)
 
 static void impulse_tilde_ft1(t_impulse_tilde *x, t_float f)
 {
-	x->x_phase = f;
+	x->x_phase = f - (int)f;
 }
 
 static void impulse_tilde_dsp(t_impulse_tilde *x, t_signal **sp)
