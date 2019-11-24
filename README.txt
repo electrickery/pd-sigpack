@@ -24,9 +24,9 @@ contact
 
 -----------------TODO--------------------
 :: update swh_plugins code from latest release: http://plugin.org.uk/releases/0.4.15
-:: normalize version to major.minor.bugfix
 
------------------v0.045------------------
+-----------------v0.0.45------------------
+::normalized version to major.minor.bugfix
 ::made Makefile more future proof
 ::added objects.txt for object search in Find Externals... (deken plugin)
 
