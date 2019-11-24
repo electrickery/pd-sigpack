@@ -1,0 +1,20 @@
+chop~       multiplicates incoming signal by factor x if modulation
+decimate~   signal decimation by resolution and sample rate, f 75
+diode~      diode rectifier network, f 75;
+foldback~   mirrors signal at specified borders, f 75;
+foldover~   mirrors signal at specified borders, f 75;
+freqdiv~    mirrors signal at specified borders, f 75;
+freqshift~  frequency shift by ring modulation, f 75;
+hardlimit~  brick hard limiter with residue mixer, f 75;
+harmgen~    harmonic generator for additive synthesis, f 75;
+impulse~    non-bandlimited single-sample impulses, f 75;
+rectify~    flips negative values to positive, f 75;
+round~      simple rounder, f 75;
+saturate~   soft saturation, f 75;
+shape~      reshape input by an exponential function, f 75;
+sieve~      simple sample sifter, f 75;
+split~      signal split function, f 75;
+ustep~      signal unity step function, f 75;
+valverect~  valve rectifier, f 75;
+vowel~      simple formant filter, f 75;
+wavewrap~   sinus wave wrapper, f 75;

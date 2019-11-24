@@ -27,7 +27,8 @@ contact
 :: normalize version to major.minor.bugfix
 
 -----------------v0.045------------------
-
+::made Makefile more future proof
+::added objects.txt for object search in Find Externals... (deken plugin)
 
 -----------------v0.044------------------
 ::decimate~: fixed gitch at block start
