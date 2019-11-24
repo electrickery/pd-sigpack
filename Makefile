@@ -33,7 +33,7 @@ sigpack-meta.pd
 
 externalsdir = ../..
 
-PDLIBBUILDER_DIR=.
+PDLIBBUILDER_DIR ?= .
 include $(firstword $(wildcard $(PDLIBBUILDER_DIR)/Makefile.pdlibbuilder \
   $(externalsdir)/Makefile.pdlibbuilder))
 
