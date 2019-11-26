@@ -1,4 +1,4 @@
-#N canvas 251 101 818 635 10;
+#N canvas 296 76 818 635 10;
 #X obj 23 107 sigpack/chop~;
 #X obj 23 132 sigpack/decimate~;
 #X obj 23 157 sigpack/diode~;
@@ -41,9 +41,9 @@
 #X text 161 557 valve rectifier;
 #X text 159 582 simple formant filter;
 #X text 161 607 sinus wavewrapper;
-#X obj 2 2 cnv 15 552 40 empty empty sIgpAck_0.044_signal_object_library
+#X obj 2 2 cnv 15 552 40 empty empty sIgpAck_0.0.45_signal_object_library
 3 12 0 18 -204280 -1 0;
-#X text 31 68 this version (0.044) maintained by Fred Jan Kraan <fjkraan@xs4all.nl>
-, f 70;
 #X text 7 47 (c) 2006 by Martin Weiss <postmeister@weiss-archiv.de>
 <http://www.weiss-archiv.de>, f 84;
+#X text 31 68 this version (0.0.45) maintained by Fred Jan Kraan <fjkraan@xs4all.nl>
+, f 70;
