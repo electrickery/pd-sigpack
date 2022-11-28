@@ -25,6 +25,11 @@ contact
 -----------------TODO--------------------
 :: update swh_plugins code from latest release: http://plugin.org.uk/releases/0.4.15
 
+-----------------v0.45.1------------------
+::changed version format to conform to standard practice. As there are no finctional changes, this counts as bugfix.
+::updated the Makefile.pd-lib-builder to 0.6.0.
+::updated email address.
+
 -----------------v0.0.45------------------
 ::normalized version to major.minor.bugfix
 ::made Makefile more future proof

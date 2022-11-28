@@ -33,4 +33,4 @@ See the original README.txt for more information.
 
 For bugs found in this version, please report them to me. Martin is not responsible for bugs introduced by me.
 
-Fred Jan Kraan fjkraan@xs4all.nl 2016-09-02
+Fred Jan Kraan fjkraan@xs4all.nl 2022-11-28
