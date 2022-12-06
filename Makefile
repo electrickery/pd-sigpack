@@ -31,9 +31,6 @@ LICENSE.txt \
 README.txt \
 sigpack-meta.pd
 
-externalsdir = ../..
-
 PDLIBBUILDER_DIR=pd-lib-builder/
-include $(firstword $(wildcard $(PDLIBBUILDER_DIR)/Makefile.pdlibbuilder \
-  $(externalsdir)/Makefile.pdlibbuilder))
+include $(PDLIBBUILDER_DIR)/Makefile.pdlibbuilder
 
